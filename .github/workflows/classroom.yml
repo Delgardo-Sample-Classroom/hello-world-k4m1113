@@ -19,7 +19,7 @@ jobs:
       with:
         test-name: Hello world test
         setup-command: ''
-        command: "./hello_world.py"
+        command: python3 ./hello_world.py
         input: ''
         expected-output: Hello, world!\n
         comparison-method: regex
@@ -31,7 +31,7 @@ jobs:
       with:
         test-name: Filename test
         setup-command: ''
-        command: "./hello_world.py"
+        command: python3 ./hello_world.py
         timeout: 10
         max-score: 50
     - name: Autograding Reporter
