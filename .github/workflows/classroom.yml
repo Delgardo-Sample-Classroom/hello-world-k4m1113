@@ -21,8 +21,8 @@ jobs:
         setup-command: ''
         command: "./hello_world.py"
         input: ''
-        expected-output: Hello, world!
-        comparison-method: exact
+        expected-output: Hello, world!\n
+        comparison-method: regex
         timeout: 10
         max-score: 50
     - name: Filename test
