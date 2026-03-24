@@ -13,11 +13,20 @@ jobs:
     steps:
     - name: Checkout code
       uses: actions/checkout@v4
-    - name: Hello world test
-      id: hello-world-test
+    - name: Filename is hello_world.py
+      id: filename-is-hello_world-py
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: Filename is hello_world.py
+        setup-command: ''
+        command: python3 ./hello_world.py
+        timeout: 10
+        max-score: 50
+    - name: Program prints "Hello, world!"
+      id: program-prints-hello-world
       uses: classroom-resources/autograding-io-grader@v1
       with:
-        test-name: Hello world test
+        test-name: Program prints "Hello, world!"
         setup-command: ''
         command: python3 ./hello_world.py
         input: ''
@@ -25,19 +34,10 @@ jobs:
         comparison-method: contains
         timeout: 10
         max-score: 50
-    - name: Filename test
-      id: filename-test
-      uses: classroom-resources/autograding-command-grader@v1
-      with:
-        test-name: Filename test
-        setup-command: ''
-        command: python3 ./hello_world.py
-        timeout: 10
-        max-score: 50
     - name: Autograding Reporter
       uses: classroom-resources/autograding-grading-reporter@v1
       env:
-        HELLO-WORLD-TEST_RESULTS: "${{steps.hello-world-test.outputs.result}}"
-        FILENAME-TEST_RESULTS: "${{steps.filename-test.outputs.result}}"
+        FILENAME-IS-HELLO_WORLD-PY_RESULTS: "${{steps.filename-is-hello_world-py.outputs.result}}"
+        PROGRAM-PRINTS-HELLO-WORLD_RESULTS: "${{steps.program-prints-hello-world.outputs.result}}"
       with:
-        runners: hello-world-test,filename-test
+        runners: filename-is-hello_world-py,program-prints-hello-world
